@@ -1,0 +1,912 @@
+{
+	"info": {
+		"_postman_id": "9b4323e4-2c85-4f90-b83a-2b2bda7541b0",
+		"name": "BIM 360 Data Connector",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Tutorials",
+			"item": [
+				{
+					"name": "GET DATA",
+					"item": [
+						{
+							"name": "GET Requests",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "e880be7b-c7dc-42eb-bce5-80caa418a789",
+										"exec": [
+											"pm.test(\"Get requests collection - status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"find one request id\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    pm.expect(body.results.length).not.eq(0);",
+											"    pm.environment.set(\"request_id\", body.results[0].id);",
+											"    console.log(body);",
+											" ",
+											"}); "
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests"
+							},
+							"response": []
+						},
+						{
+							"name": "GET One Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b1f4d789-25d7-4839-8718-98a879d94544",
+										"exec": [
+											"pm.test(\"Get one request- status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"find one request data\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    pm.expect(body).not.eq(undefined);",
+											"    console.log(body);",
+											"}); "
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests/{{request_id}}"
+							},
+							"response": []
+						},
+						{
+							"name": "GET One Request Jobs",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "efcbedbf-1c77-4ae8-9343-fdc2df8ac016",
+										"exec": [
+											"pm.test(\"Get one request jobs- status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"find one id of complete and success job\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    var find = body.results.find(d=>d.status == \"complete\" && d.completionStatus == \"success\" )",
+											"    pm.expect(find).not.eq(undefined);",
+											"    pm.environment.set(\"job_id\", find.id);",
+											"    console.log(find); ",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests/{{request_id}}/jobs"
+							},
+							"response": []
+						},
+						{
+							"name": "GET One Request One Job",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "7d869b8a-cb06-4759-b431-93eda92ff90b",
+										"exec": [
+											"pm.test(\"GET One Request One Job- status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"find one job data\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    pm.expect(body).not.eq(undefined);",
+											"    console.log(body);",
+											"}); "
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}"
+							},
+							"response": []
+						},
+						{
+							"name": "GET One Job Data List",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "e7fc5bc6-6158-416a-8d16-f3b1c2bfd7d7",
+										"exec": [
+											"pm.test(\"GET One Job Data List- status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"find readme html\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    var find = body.find(d=>d.name == \"README.html\" )",
+											"    pm.expect(find).not.eq(undefined);",
+											"    pm.environment.set(\"readme_key\", find.name); ",
+											"    console.log(find); ",
+											"});",
+											"",
+											"pm.test(\"find data zip\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    var find = body.find(d=>d.name == \"autodesk_data_extract.zip\" )",
+											"    pm.expect(find).not.eq(undefined);",
+											"    pm.environment.set(\"data_zip_key\", find.name);",
+											"    console.log(find); ",
+											"});",
+											"",
+											"pm.test(\"find one csv \", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    var find = body.find(d=>d.name.includes(\".csv\") )",
+											"    pm.expect(find).not.eq(undefined);",
+											"    pm.environment.set(\"one_csv_key\", find.name);",
+											"    console.log(find); ",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}/data-listing"
+							},
+							"response": []
+						},
+						{
+							"name": "GET Reame.html signed url and headers",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "9e134764-deb6-4675-96fc-d0585d9782c8",
+										"exec": [
+											"pm.test(\"GET Reame.html signed url and headers - status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"get signed url and headers of readme html\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    pm.expect(body.signedUrl).not.eq(undefined);",
+											"",
+											"    var sections = body.signedUrl.split(\"?\"); ",
+											"        pm.environment.set(\"signed_url\", sections[0]);  ",
+											"",
+											"    var params = sections[1].split(\"&\");",
+											"    pm.environment.set(\"AWSAccessKeyId\", params[0].split(\"=\")[1]);",
+											"    pm.environment.set(\"Expires\", params[1].split(\"=\")[1]); ",
+											"    pm.environment.set(\"Signature\", params[2].split(\"=\")[1]);",
+											"    pm.environment.set(\"x-amz-security-token\", params[3].split(\"=\")[1]);",
+											"",
+											"    console.log(body);",
+											"}); "
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}/data/{{readme_key}}"
+							},
+							"response": []
+						},
+						{
+							"name": "GET Reame.html Content",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "fd012982-2ae4-4ce3-b1b0-ffee4d855315",
+										"exec": [
+											"pm.test(\"GET Reame.html Content - status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{signed_url}}?AWSAccessKeyId={{AWSAccessKeyId}}&Expires={{Expires}}&Signature={{Signature}}&x-amz-security-token={{x-amz-security-token}}",
+									"host": [
+										"{{signed_url}}"
+									],
+									"query": [
+										{
+											"key": "AWSAccessKeyId",
+											"value": "{{AWSAccessKeyId}}"
+										},
+										{
+											"key": "Expires",
+											"value": "{{Expires}}"
+										},
+										{
+											"key": "Signature",
+											"value": "{{Signature}}"
+										},
+										{
+											"key": "x-amz-security-token",
+											"value": "{{x-amz-security-token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET One CSV signed url and headers",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "23626be3-8423-41e3-b249-bb2f34cf9597",
+										"exec": [
+											"pm.test(\"GET One CSV signed url and headers - status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"get signed url and headers of readme html\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    pm.expect(body.signedUrl).not.eq(undefined);",
+											"",
+											"    var sections = body.signedUrl.split(\"?\"); ",
+											"        pm.environment.set(\"signed_url\", sections[0]);  ",
+											"",
+											"    var params = sections[1].split(\"&\");",
+											"    pm.environment.set(\"AWSAccessKeyId\", params[0].split(\"=\")[1]);",
+											"    pm.environment.set(\"Expires\", params[1].split(\"=\")[1]); ",
+											"    pm.environment.set(\"Signature\", params[2].split(\"=\")[1]);",
+											"    pm.environment.set(\"x-amz-security-token\", params[3].split(\"=\")[1]);",
+											"",
+											"    console.log(body);",
+											"}); "
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}/data/{{one_csv_key}}"
+							},
+							"response": []
+						},
+						{
+							"name": "GET One CSV contents",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "afca922c-396e-4040-ac7e-bfbb40fd4a5f",
+										"exec": [
+											"pm.test(\"GET One CSV contents - status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{signed_url}}?AWSAccessKeyId={{AWSAccessKeyId}}&Expires={{Expires}}&Signature={{Signature}}&x-amz-security-token={{x-amz-security-token}}",
+									"host": [
+										"{{signed_url}}"
+									],
+									"query": [
+										{
+											"key": "AWSAccessKeyId",
+											"value": "{{AWSAccessKeyId}}"
+										},
+										{
+											"key": "Expires",
+											"value": "{{Expires}}"
+										},
+										{
+											"key": "Signature",
+											"value": "{{Signature}}"
+										},
+										{
+											"key": "x-amz-security-token",
+											"value": "{{x-amz-security-token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET Data.zip signed url and headers",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "4d07d268-0fde-4eab-bc3d-b4c6f012e4ef",
+										"exec": [
+											"pm.test(\"GET Data.zip signed url and headers - status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"get signed url and headers of readme html\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    pm.expect(body.signedUrl).not.eq(undefined);",
+											"",
+											"    var sections = body.signedUrl.split(\"?\"); ",
+											"        pm.environment.set(\"signed_url\", sections[0]);  ",
+											"",
+											"    var params = sections[1].split(\"&\");",
+											"    pm.environment.set(\"AWSAccessKeyId\", params[0].split(\"=\")[1]);",
+											"    pm.environment.set(\"Expires\", params[1].split(\"=\")[1]); ",
+											"    pm.environment.set(\"Signature\", params[2].split(\"=\")[1]);",
+											"    pm.environment.set(\"x-amz-security-token\", params[3].split(\"=\")[1]);",
+											"",
+											"    console.log(body);",
+											"}); "
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}/data/{{data_zip_key}}"
+							},
+							"response": []
+						},
+						{
+							"name": "GET Data.zip Contents",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "6d6609bf-0815-4496-963e-c33b481a72d2",
+										"exec": [
+											"pm.test(\"GET Data.zip Contents - status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{signed_url}}?AWSAccessKeyId={{AWSAccessKeyId}}&Expires={{Expires}}&Signature={{Signature}}&x-amz-security-token={{x-amz-security-token}}",
+									"host": [
+										"{{signed_url}}"
+									],
+									"query": [
+										{
+											"key": "AWSAccessKeyId",
+											"value": "{{AWSAccessKeyId}}"
+										},
+										{
+											"key": "Expires",
+											"value": "{{Expires}}"
+										},
+										{
+											"key": "Signature",
+											"value": "{{Signature}}"
+										},
+										{
+											"key": "x-amz-security-token",
+											"value": "{{x-amz-security-token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b16678ab-155c-40c7-9af7-e17894b7c2fd",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}",
+										"disabled": true
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"description\":\"xiaodong request by API\",\r\n      \"isActive\": true,\r\n\r\n     \"scheduleInterval\": \"ONE_TIME\",\r\n    \"reoccuringInterval\": null,\r\n     \"serviceGroups\": [ \r\n        \"issues\" \r\n    ],  \r\n    \"effectiveFrom\": \"2020-11-05T08:25:33.464Z\",\r\n            \"effectiveTo\": null,\r\n    \"callbackUrl\": \"https://envu5fjljdd5k.x.pipedream.net/\"\r\n}"
+								},
+								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests"
+							},
+							"response": []
+						},
+						{
+							"name": "Create Request Copy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "ffd4826a-597b-48c3-8c4a-afbe2175843b",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}",
+										"disabled": true
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"description\": \"laborum officia eiusmod dolor consectet\",\r\n  \"isActive\": true,\r\n  \"scheduleInterval\": \"ONE_TIME\",\r\n  \"reoccuringInterval\": -13815251,\r\n  \"effectiveFrom\": \"2020-11-05T08:25:33.464Z\",\r\n  \"effectiveTo\":  \"2020-11-05T09:25:33.464Z\",\r\n\r\n  \"serviceGroups\": [\r\n    \"issues\" \r\n  ],\r\n  \"callbackUrl\": \"https://enjv77q4uxcn.x.pipedream.net/\"\r\n}"
+								},
+								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests"
+							},
+							"response": []
+						},
+						{
+							"name": "Create Request Copy 4",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b0805017-9bbb-48f7-aef1-d4b2b194f2bd",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}",
+										"disabled": true
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"description\": \"laborum officia eiusmod dolor consectet\",\r\n  \"isActive\": false \r\n}"
+								},
+								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests/{{request_id}}"
+							},
+							"response": []
+						},
+						{
+							"name": "Create Request Copy 2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "59fcda6a-4687-4a63-b963-1feadd5f7e6d",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}",
+										"disabled": true
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"description\": \"Xiaodong Test Day-24 \",\r\n  \"isActive\": true,\r\n  \"scheduleInterval\": \"DAY\",\r\n  \"reoccuringInterval\": 5,\r\n  \"effectiveFrom\": \"2020-11-06T08:25:33.464Z\",\r\n  \"effectiveTo\":  \"2020-11-12T09:25:33.464Z\",\r\n\r\n  \"serviceGroups\": [\r\n    \"issues\" \r\n  ],\r\n  \"callbackUrl\": \"https://enjv77q4uxcn.x.pipedream.net/\"\r\n}"
+								},
+								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests"
+							},
+							"response": []
+						},
+						{
+							"name": "Create Request Copy 3",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b06ee0b5-7541-4219-90aa-5a83a17d55ac",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}",
+										"disabled": true
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"description\": \"laborum officia eiusmod dolor consectet\",\r\n  \"isActive\": true,\r\n  \"scheduleInterval\": \"ONE_TIME\",\r\n  \"reoccuringInterval\": -13815251,\r\n  \"effectiveFrom\": \"2020-11-05T08:25:33.464Z\",\r\n  \"effectiveTo\":  \"2020-11-05T09:25:33.464Z\",\r\n\r\n  \"serviceGroups\": [\r\n    \"issues\" \r\n  ],\r\n  \"callbackUrl\": \"https://enjv77q4uxcn.x.pipedream.net/\"\r\n}"
+								},
+								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests/1627e82a-1d39-459f-ac1e-3bc352a8703d"
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "GET Hubs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1bab6fee-b976-4ad0-bdb8-125af7611d51",
+						"exec": [
+							"var body = JSON.parse(responseBody);",
+							"pm.environment.set(\"hub_id_dm\", body.data[0].id)",
+							"",
+							"if(body.data[0].id.includes(\"a.\")){",
+							"var id = body.data[0].id.split(\"a.\")[1]",
+							"pm.environment.set(\"hub_id_a360\", id)",
+							"}",
+							"",
+							"if(body.data[0].id.includes(\"b.\")){",
+							"var id = body.data[0].id.split(\"b.\")[1]",
+							"pm.environment.set(\"hub_id_b360\", id)",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"url": "{{base_domain}}/project/v1/hubs"
+			},
+			"response": []
+		},
+		{
+			"name": "GET User@ME",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "82b252fb-862b-40b9-94b2-a6dcfc2166f2",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": "{{base_domain}}/userprofile/v1/users/@me"
+			},
+			"response": []
+		},
+		{
+			"name": "GET Projects",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ced6952f-9dc1-494b-b4cd-e97f2a9ac099",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_domain}}/project/v1/hubs/{{hub_id_dm}}/projects?page[limit]=200",
+					"host": [
+						"{{base_domain}}"
+					],
+					"path": [
+						"project",
+						"v1",
+						"hubs",
+						"{{hub_id_dm}}",
+						"projects"
+					],
+					"query": [
+						{
+							"key": "page[limit]",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Top Folders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{base_domain}}/project/v1/hubs/{{hub_id_dm}}/projects/{{project_id_dm}}/topFolders"
+			},
+			"response": []
+		},
+		{
+			"name": "GET Folder Contents",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://developer.api.autodesk.com/data/v1/projects/{{project_id_dm}}/folders/urn:adsk.wipprod:fs.folder:co.oWrOwMCWTpWH-_glicursA/contents"
+			},
+			"response": []
+		},
+		{
+			"name": "GET Folder Contents Copy",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"jsonapi\": {\n          \"version\": \"1.0\"\n        },\n        \"data\": {\n          \"type\": \"items\",\n          \"id\": \"urn:adsk.wipprod:dm.lineage:Eb27jjSLRxS_S0IZPkR1wA\",\n          \"relationships\":{\n          \"parent\": {\n                  \"data\": {\n                    \"type\": \"folders\",\n                    \"id\": \"urn:adsk.wipprod:fs.folder:co.keYnbIISQW2h5IpoUBtLHQ\"\n                  }\n                }\n          },\n          \"attributes\": {\n            \"displayName\": \"new file.\"\n          }\n        }\n      }"
+				},
+				"url": "https://developer.api.autodesk.com/data/v1/projects/{{project_id_dm}}/items/urn:adsk.wipprod:dm.lineage:UZ2khSXsR-2poPP16zMjdA"
+			},
+			"response": []
+		},
+		{
+			"name": "GET Folder Contents Copy 2",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"jsonapi\": {\n          \"version\": \"1.0\"\n        },\n        \"data\": {\n          \"type\": \"versions\",\n          \"id\": \"urn:adsk.wipprod:fs.file:vf.2jPyKwzEQbmclt0Fo5-Sgw?version=1\",\n          \"attributes\": {\n            \"displayName\": \"new name for drawing.rvt\"\n          }\n        }\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": "https://developer.api.autodesk.com/data/v1/projects/{{project_id_dm}}/items/urn:adsk.wipprod:dm.lineage:2jPyKwzEQbmclt0Fo5-Sgw"
+			},
+			"response": []
+		},
+		{
+			"name": "GET Matadata",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://developer.api.autodesk.com/modelderivative/v2/designdata//metadata"
+			},
+			"response": []
+		},
+		{
+			"name": "Authentication Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "da1fbda6-a205-4708-84bb-1dec055361a7",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"access_token\", data.access_token);",
+							"postman.setEnvironmentVariable(\"expires_in\", data.expires_in);",
+							"postman.setEnvironmentVariable(\"token_type\", data.token_type);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "{{client_id}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{client_secret}}",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "data:read data:write bucket:create bucket:read account:read bucket:delete code:all",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					],
+					"options": {
+						"urlencoded": {}
+					}
+				},
+				"url": "{{base_domain}}/authentication/v1/authenticate"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": {
+			"accessToken": "eyJhbGciOiJIUzI1NiIsImtpZCI6Imp3dF9zeW1tZXRyaWNfa2V5In0.eyJzY29wZSI6WyJkYXRhOnJlYWQiLCJkYXRhOndyaXRlIiwiYWNjb3VudDpyZWFkIiwiYnVja2V0OnJlYWQiLCJkYXRhOmNyZWF0ZSJdLCJjbGllbnRfaWQiOiJxWTBlQTQwSzdMclhXZVFaSmRETXVYTGgxOEhQV0RFMCIsImdyYW50X2lkIjoiU1dGOGNJOUxNajVhWENrVndYcVVFdnp2eVROUUJLYVUiLCJhdWQiOiJodHRwczovL2F1dG9kZXNrLmNvbS9hdWQvand0ZXhwNjAiLCJqdGkiOiJ2MHAzZWhheWJsNWNHN2FTM3MyMkIyMVpEV1RrdEhBdzdnT0pMM3dnNWQ5aHRzR3IwMmJkbHZjS2dETktsNlo0IiwidXNlcmlkIjoiWEMzSEtWOUJWTUVSIiwiZXhwIjoxNjA2NDg4OTE3fQ.Pcv7il8-qVlBR4wxffVlFYlRA8CniPiMBzXvhml0Ryo",
+			"tokenType": "Bearer",
+			"addTokenTo": "header"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "61c72f80-e2ed-48ec-99de-7025c1e2c441",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "a56cc933-93e8-4de5-b35f-2e89249b1bb7",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
