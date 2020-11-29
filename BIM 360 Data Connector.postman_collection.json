@@ -479,24 +479,24 @@
 										"exec": [
 											"var d = new Date()",
 											"var current_time = d.getFullYear() ",
-											"                +\"-\" + ((\"0\" + (d.getMonth()+1)).slice(-2) )",
-											"                + \"-\" +  (\"0\" + d.getDate()).slice(-2) ",
-											"                + \"T\" +(\"0\" + d.getHours()).slice(-2) ",
-											"                + \":\" + (\"0\" + d.getMinutes()).slice(-2) ",
-											"                + \":\" + (\"0\" + d.getSeconds()).slice(-2) ",
+											"                +\"-\" + ((\"0\" + (d.getUTCMonth()+1)).slice(-2) )",
+											"                + \"-\" +  (\"0\" + d.getUTCDate()).slice(-2) ",
+											"                + \"T\" +(\"0\" + d.getUTCHours()).slice(-2) ",
+											"                + \":\" + (\"0\" + d.getUTCMinutes()).slice(-2) ",
+											"                + \":\" + (\"0\" + d.getUTCSeconds()).slice(-2) ",
 											"                + \".000Z\"",
 											"pm.environment.set(\"current_time\", current_time);",
 											"",
-											"d.setMinutes(d.getMinutes()+2) // start execute after 2 minutes",
+											"d.setUTCMinutes(d.getUTCMinutes()-2) // start execute after 2 minutes",
 											"",
-											"var effective_time = d.getFullYear() ",
-											"                +\"-\" + ((\"0\" + (d.getMonth()+1)).slice(-2) )",
-											"                + \"-\" +  (\"0\" + d.getDate()).slice(-2) ",
-											"                + \"T\" +(\"0\" + d.getHours()).slice(-2) ",
-											"                + \":\" + (\"0\" + d.getMinutes()).slice(-2)",
-											"                + \":\" + (\"0\" + d.getSeconds()).slice(-2) ",
+											"var effective_from = d.getUTCFullYear() ",
+											"                +\"-\" + ((\"0\" + (d.getUTCMonth()+1)).slice(-2) )",
+											"                + \"-\" +  (\"0\" + d.getUTCDate()).slice(-2) ",
+											"                + \"T\" +(\"0\" + d.getUTCHours()).slice(-2) ",
+											"                + \":\" + (\"0\" + d.getUTCMinutes()).slice(-2)",
+											"                + \":\" + (\"0\" + d.getUTCSeconds()).slice(-2) ",
 											"                + \".000Z\"",
-											"pm.environment.set(\"effective_time\", effective_time);",
+											"pm.environment.set(\"effective_from\", effective_from);",
 											"",
 											""
 										],
@@ -521,7 +521,95 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"description\":\"Test by API - {{current_time}}\",\r\n    \"isActive\": true, \r\n    \"scheduleInterval\": \"ONE_TIME\",\r\n    \"serviceGroups\": [ \r\n        \"issues\" \r\n    ],  \r\n    \"effectiveFrom\": \"{{effective_time}}\",\r\n    \"callbackUrl\": \"https://enm6413q7gun.x.pipedream.net/\"\r\n}"
+									"raw": "{\r\n    \"description\":\"Test by API - {{current_time}}\",\r\n    \"isActive\": true, \r\n    \"scheduleInterval\": \"ONE_TIME\",\r\n    \"serviceGroups\": [ \r\n        \"issues\" \r\n    ],  \r\n    \"effectiveFrom\": \"{{effective_from}}\",\r\n    \"callbackUrl\": \"{{callbackUrl}}\"\r\n}"
+								},
+								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests"
+							},
+							"response": []
+						},
+						{
+							"name": "Create DAY Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "8ee62589-c9ba-4cc0-82d3-463896c9ca82",
+										"exec": [
+											"pm.test(\"Create One_Time Request- status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"find request id\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    pm.expect(body).not.eq(undefined);",
+											"    pm.environment.set(\"request_id\", body.id);",
+											"",
+											"    console.log(body);",
+											"}); "
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "301a5633-ba11-4a8a-9031-6e488f021376",
+										"exec": [
+											"var d = new Date()",
+											"var current_time = d.getFullYear() ",
+											"                +\"-\" + ((\"0\" + (d.getUTCMonth()+1)).slice(-2) )",
+											"                + \"-\" +  (\"0\" + d.getUTCDate()).slice(-2) ",
+											"                + \"T\" +(\"0\" + d.getUTCHours()).slice(-2) ",
+											"                + \":\" + (\"0\" + d.getUTCMinutes()).slice(-2) ",
+											"                + \":\" + (\"0\" + d.getUTCSeconds()).slice(-2) ",
+											"                + \".000Z\"",
+											"pm.environment.set(\"current_time\", current_time);",
+											"",
+											"d.setUTCMinutes(d.getUTCMinutes()+2) // start execute after 2 minutes",
+											"",
+											"var effective_from = d.getUTCFullYear() ",
+											"                +\"-\" + ((\"0\" + (d.getUTCMonth()+1)).slice(-2) )",
+											"                + \"-\" +  (\"0\" + d.getUTCDate()).slice(-2) ",
+											"                + \"T\" +(\"0\" + d.getUTCHours()).slice(-2) ",
+											"                + \":\" + (\"0\" + d.getUTCMinutes()).slice(-2)",
+											"                + \":\" + (\"0\" + d.getUTCSeconds()).slice(-2) ",
+											"                + \".000Z\"",
+											"pm.environment.set(\"effective_from\", effective_from);",
+											"",
+											"d.setUTCDate(d.getUTCDate()+10) // end execute after 10 days",
+											"",
+											"var effective_to = d.getUTCFullYear() ",
+											"                +\"-\" + ((\"0\" + (d.getUTCMonth()+1)).slice(-2) )",
+											"                + \"-\" +  (\"0\" + d.getUTCDate()).slice(-2) ",
+											"                + \"T\" +(\"0\" + d.getUTCHours()).slice(-2) ",
+											"                + \":\" + (\"0\" + d.getUTCMinutes()).slice(-2)",
+											"                + \":\" + (\"0\" + d.getUTCSeconds()).slice(-2) ",
+											"                + \".000Z\"",
+											"pm.environment.set(\"effective_to\", effective_to);",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}",
+										"disabled": true
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"description\":\"Test by API - {{current_time}}\",\r\n    \"isActive\": true, \r\n    \"scheduleInterval\": \"DAY\",\r\n    \"reoccuringInterval\": 1,  //every 1 day\r\n    \"serviceGroups\": [ \r\n        \"issues\" \r\n    ],  \r\n    \"effectiveFrom\": \"{{effective_from}}\",\r\n    \"effectiveTo\": \"{{effective_to}}\", \r\n    \"callbackUrl\": \"{{callbackUrl}}\"\r\n}"
 								},
 								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests"
 							},
@@ -1025,45 +1113,7 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "GET Hubs",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "1bab6fee-b976-4ad0-bdb8-125af7611d51",
-						"exec": [
-							"var body = JSON.parse(responseBody);",
-							"pm.environment.set(\"hub_id_dm\", body.data[0].id)",
-							"",
-							"if(body.data[0].id.includes(\"a.\")){",
-							"var id = body.data[0].id.split(\"a.\")[1]",
-							"pm.environment.set(\"hub_id_a360\", id)",
-							"}",
-							"",
-							"if(body.data[0].id.includes(\"b.\")){",
-							"var id = body.data[0].id.split(\"b.\")[1]",
-							"pm.environment.set(\"hub_id_b360\", id)",
-							"}"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}",
-						"type": "text"
-					}
-				],
-				"url": "{{base_domain}}/project/v1/hubs"
-			},
-			"response": []
-		},
-		{
-			"name": "GET User@ME",
+			"name": "backup-GET User@ME",
 			"event": [
 				{
 					"listen": "test",
@@ -1091,121 +1141,7 @@
 			"response": []
 		},
 		{
-			"name": "GET Projects",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "ced6952f-9dc1-494b-b4cd-e97f2a9ac099",
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{base_domain}}/project/v1/hubs/{{hub_id_dm}}/projects?page[limit]=200",
-					"host": [
-						"{{base_domain}}"
-					],
-					"path": [
-						"project",
-						"v1",
-						"hubs",
-						"{{hub_id_dm}}",
-						"projects"
-					],
-					"query": [
-						{
-							"key": "page[limit]",
-							"value": "200"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GET Top Folders",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": "{{base_domain}}/project/v1/hubs/{{hub_id_dm}}/projects/{{project_id_dm}}/topFolders"
-			},
-			"response": []
-		},
-		{
-			"name": "GET Folder Contents",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": "https://developer.api.autodesk.com/data/v1/projects/{{project_id_dm}}/folders/urn:adsk.wipprod:fs.folder:co.oWrOwMCWTpWH-_glicursA/contents"
-			},
-			"response": []
-		},
-		{
-			"name": "GET Folder Contents Copy",
-			"request": {
-				"method": "PATCH",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n        \"jsonapi\": {\n          \"version\": \"1.0\"\n        },\n        \"data\": {\n          \"type\": \"items\",\n          \"id\": \"urn:adsk.wipprod:dm.lineage:Eb27jjSLRxS_S0IZPkR1wA\",\n          \"relationships\":{\n          \"parent\": {\n                  \"data\": {\n                    \"type\": \"folders\",\n                    \"id\": \"urn:adsk.wipprod:fs.folder:co.keYnbIISQW2h5IpoUBtLHQ\"\n                  }\n                }\n          },\n          \"attributes\": {\n            \"displayName\": \"new file.\"\n          }\n        }\n      }"
-				},
-				"url": "https://developer.api.autodesk.com/data/v1/projects/{{project_id_dm}}/items/urn:adsk.wipprod:dm.lineage:UZ2khSXsR-2poPP16zMjdA"
-			},
-			"response": []
-		},
-		{
-			"name": "GET Folder Contents Copy 2",
-			"request": {
-				"method": "PATCH",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n        \"jsonapi\": {\n          \"version\": \"1.0\"\n        },\n        \"data\": {\n          \"type\": \"versions\",\n          \"id\": \"urn:adsk.wipprod:fs.file:vf.2jPyKwzEQbmclt0Fo5-Sgw?version=1\",\n          \"attributes\": {\n            \"displayName\": \"new name for drawing.rvt\"\n          }\n        }\n}",
-					"options": {
-						"raw": {}
-					}
-				},
-				"url": "https://developer.api.autodesk.com/data/v1/projects/{{project_id_dm}}/items/urn:adsk.wipprod:dm.lineage:2jPyKwzEQbmclt0Fo5-Sgw"
-			},
-			"response": []
-		},
-		{
-			"name": "GET Matadata",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": "https://developer.api.autodesk.com/modelderivative/v2/designdata//metadata"
-			},
-			"response": []
-		},
-		{
-			"name": "Authentication Copy",
+			"name": "backup- authentication-2 legged token",
 			"event": [
 				{
 					"listen": "test",
