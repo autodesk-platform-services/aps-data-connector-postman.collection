@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "9b4323e4-2c85-4f90-b83a-2b2bda7541b0",
 		"name": "BIM 360 Data Connector",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -38,7 +38,19 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests"
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"requests"
+									]
+								}
 							},
 							"response": []
 						},
@@ -67,7 +79,20 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests/{{request_id}}"
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests/{{request_id}}",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"requests",
+										"{{request_id}}"
+									]
+								}
 							},
 							"response": []
 						},
@@ -98,7 +123,21 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests/{{request_id}}/jobs"
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests/{{request_id}}/jobs",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"requests",
+										"{{request_id}}",
+										"jobs"
+									]
+								}
 							},
 							"response": []
 						},
@@ -127,7 +166,20 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}"
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"jobs",
+										"{{job_id}}"
+									]
+								}
 							},
 							"response": []
 						},
@@ -174,7 +226,21 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}/data-listing"
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}/data-listing",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"jobs",
+										"{{job_id}}",
+										"data-listing"
+									]
+								}
 							},
 							"response": []
 						},
@@ -213,7 +279,22 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}/data/{{readme_key}}"
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}/data/{{readme_key}}",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"jobs",
+										"{{job_id}}",
+										"data",
+										"{{readme_key}}"
+									]
+								}
 							},
 							"response": []
 						},
@@ -301,7 +382,22 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}/data/{{one_csv_key}}"
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}/data/{{one_csv_key}}",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"jobs",
+										"{{job_id}}",
+										"data",
+										"{{one_csv_key}}"
+									]
+								}
 							},
 							"response": []
 						},
@@ -389,7 +485,22 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}/data/{{data_zip_key}}"
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}/data/{{data_zip_key}}",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"jobs",
+										"{{job_id}}",
+										"data",
+										"{{data_zip_key}}"
+									]
+								}
 							},
 							"response": []
 						},
@@ -523,7 +634,19 @@
 									"mode": "raw",
 									"raw": "{\r\n    \"description\":\"Test by API - {{current_time}}\",\r\n    \"isActive\": true, \r\n    \"scheduleInterval\": \"ONE_TIME\",\r\n    \"serviceGroups\": [ \r\n        \"issues\" \r\n    ],  \r\n    \"effectiveFrom\": \"{{effective_from}}\",\r\n    \"callbackUrl\": \"{{callbackUrl}}\"\r\n}"
 								},
-								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests"
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"requests"
+									]
+								}
 							},
 							"response": []
 						},
@@ -609,9 +732,21 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"description\":\"Test by API - {{current_time}}\",\r\n    \"isActive\": true, \r\n    \"scheduleInterval\": \"DAY\",\r\n    \"reoccuringInterval\": 1,  //every 1 day\r\n    \"serviceGroups\": [ \r\n        \"issues\" \r\n    ],  \r\n    \"effectiveFrom\": \"{{effective_from}}\",\r\n    \"effectiveTo\": \"{{effective_to}}\", \r\n    \"callbackUrl\": \"{{callbackUrl}}\"\r\n}"
+									"raw": "{\r\n    \"description\":\"Test by API - {{current_time}}\",\r\n    \"isActive\": true, \r\n    \"scheduleInterval\": \"DAY\",\r\n    \"reoccuringInterval\": 1,   \r\n    \"serviceGroups\": [ \r\n        \"issues\" \r\n    ],  \r\n    \"effectiveFrom\": \"{{effective_from}}\",\r\n    \"effectiveTo\": \"{{effective_to}}\", \r\n    \"callbackUrl\": \"{{callbackUrl}}\"\r\n}"
 								},
-								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests"
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"requests"
+									]
+								}
 							},
 							"response": []
 						},
@@ -621,7 +756,7 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "5e572912-c5c8-4df6-bd7c-422f3b2064f3",
+										"id": "9c6a01f0-c841-4f12-8705-f7b310c43cad",
 										"exec": [
 											"pm.test(\"Get one request- status code is 200\", function () {",
 											"    pm.response.to.have.status(200);",
@@ -630,6 +765,7 @@
 											"pm.test(\"find one request data\", function () {",
 											"    var body = JSON.parse(responseBody);",
 											"    pm.expect(body).not.eq(undefined);",
+											"    pm.environment.set(\"current_time\", current_time);",
 											"    console.log(body);",
 											"}); "
 										],
@@ -640,7 +776,20 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests/{{request_id}}"
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests/{{request_id}}",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"requests",
+										"{{request_id}}"
+									]
+								}
 							},
 							"response": []
 						},
@@ -671,7 +820,21 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests/{{request_id}}/jobs"
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests/{{request_id}}/jobs",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"requests",
+										"{{request_id}}",
+										"jobs"
+									]
+								}
 							},
 							"response": []
 						},
@@ -700,7 +863,20 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}"
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"jobs",
+										"{{job_id}}"
+									]
+								}
 							},
 							"response": []
 						},
@@ -747,7 +923,21 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}/data-listing"
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}/data-listing",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"jobs",
+										"{{job_id}}",
+										"data-listing"
+									]
+								}
 							},
 							"response": []
 						},
@@ -786,7 +976,22 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}/data/{{readme_key}}"
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}/data/{{readme_key}}",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"jobs",
+										"{{job_id}}",
+										"data",
+										"{{readme_key}}"
+									]
+								}
 							},
 							"response": []
 						},
@@ -874,7 +1079,22 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}/data/{{one_csv_key}}"
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}/data/{{one_csv_key}}",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"jobs",
+										"{{job_id}}",
+										"data",
+										"{{one_csv_key}}"
+									]
+								}
 							},
 							"response": []
 						},
@@ -962,7 +1182,22 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}/data/{{data_zip_key}}"
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}/data/{{data_zip_key}}",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"jobs",
+										"{{job_id}}",
+										"data",
+										"{{data_zip_key}}"
+									]
+								}
 							},
 							"response": []
 						},
@@ -1058,7 +1293,20 @@
 									"mode": "raw",
 									"raw": "{\r\n  \"description\": \"Updated Description\",\r\n  \"isActive\": false \r\n}"
 								},
-								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests/{{request_id}}"
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests/{{request_id}}",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"requests",
+										"{{request_id}}"
+									]
+								}
 							},
 							"response": []
 						},
@@ -1079,7 +1327,20 @@
 							"request": {
 								"method": "DELETE",
 								"header": [],
-								"url": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests/{{request_id}}"
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests/{{request_id}}",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"requests",
+										"{{request_id}}"
+									]
+								}
 							},
 							"response": []
 						}
@@ -1128,15 +1389,19 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}",
-						"type": "text",
-						"disabled": true
-					}
-				],
-				"url": "{{base_domain}}/userprofile/v1/users/@me"
+				"header": [],
+				"url": {
+					"raw": "{{base_domain}}/userprofile/v1/users/@me",
+					"host": [
+						"{{base_domain}}"
+					],
+					"path": [
+						"userprofile",
+						"v1",
+						"users",
+						"@me"
+					]
+				}
 			},
 			"response": []
 		},
@@ -1199,18 +1464,90 @@
 						"urlencoded": {}
 					}
 				},
-				"url": "{{base_domain}}/authentication/v1/authenticate"
+				"url": {
+					"raw": "{{base_domain}}/authentication/v1/authenticate",
+					"host": [
+						"{{base_domain}}"
+					],
+					"path": [
+						"authentication",
+						"v1",
+						"authenticate"
+					]
+				}
 			},
 			"response": []
 		}
 	],
 	"auth": {
 		"type": "oauth2",
-		"oauth2": {
-			"accessToken": "eyJhbGciOiJIUzI1NiIsImtpZCI6Imp3dF9zeW1tZXRyaWNfa2V5In0.eyJzY29wZSI6WyJkYXRhOnJlYWQiLCJkYXRhOndyaXRlIiwiYWNjb3VudDpyZWFkIiwiYnVja2V0OnJlYWQiLCJkYXRhOmNyZWF0ZSJdLCJjbGllbnRfaWQiOiJxWTBlQTQwSzdMclhXZVFaSmRETXVYTGgxOEhQV0RFMCIsImdyYW50X2lkIjoiU1dGOGNJOUxNajVhWENrVndYcVVFdnp2eVROUUJLYVUiLCJhdWQiOiJodHRwczovL2F1dG9kZXNrLmNvbS9hdWQvand0ZXhwNjAiLCJqdGkiOiJ2MHAzZWhheWJsNWNHN2FTM3MyMkIyMVpEV1RrdEhBdzdnT0pMM3dnNWQ5aHRzR3IwMmJkbHZjS2dETktsNlo0IiwidXNlcmlkIjoiWEMzSEtWOUJWTUVSIiwiZXhwIjoxNjA2NDg4OTE3fQ.Pcv7il8-qVlBR4wxffVlFYlRA8CniPiMBzXvhml0Ryo",
-			"tokenType": "Bearer",
-			"addTokenTo": "header"
-		}
+		"oauth2": [
+			{
+				"key": "scope",
+				"value": "data:read data:write data:create",
+				"type": "string"
+			},
+			{
+				"key": "tokenName",
+				"value": "access_token",
+				"type": "string"
+			},
+			{
+				"key": "challengeAlgorithm",
+				"value": "S256",
+				"type": "string"
+			},
+			{
+				"key": "redirect_uri",
+				"value": "https://www.getpostman.com/oauth2/callback",
+				"type": "string"
+			},
+			{
+				"key": "grant_type",
+				"value": "authorization_code",
+				"type": "string"
+			},
+			{
+				"key": "clientSecret",
+				"value": "{{client_secret}}",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "{{client_id}}",
+				"type": "string"
+			},
+			{
+				"key": "authUrl",
+				"value": "https://developer.api.autodesk.com/authentication/v1/authorize",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "client_authentication",
+				"value": "body",
+				"type": "string"
+			},
+			{
+				"key": "accessTokenUrl",
+				"value": "https://developer.api.autodesk.com/authentication/v1/gettoken",
+				"type": "string"
+			},
+			{
+				"key": "accessToken",
+				"value": "eyJhbGciOiJIUzI1NiIsImtpZCI6Imp3dF9zeW1tZXRyaWNfa2V5In0.eyJzY29wZSI6WyJkYXRhOnJlYWQiLCJkYXRhOndyaXRlIiwiYWNjb3VudDpyZWFkIiwiYnVja2V0OnJlYWQiLCJkYXRhOmNyZWF0ZSJdLCJjbGllbnRfaWQiOiJxWTBlQTQwSzdMclhXZVFaSmRETXVYTGgxOEhQV0RFMCIsImdyYW50X2lkIjoiU1dGOGNJOUxNajVhWENrVndYcVVFdnp2eVROUUJLYVUiLCJhdWQiOiJodHRwczovL2F1dG9kZXNrLmNvbS9hdWQvand0ZXhwNjAiLCJqdGkiOiJ2MHAzZWhheWJsNWNHN2FTM3MyMkIyMVpEV1RrdEhBdzdnT0pMM3dnNWQ5aHRzR3IwMmJkbHZjS2dETktsNlo0IiwidXNlcmlkIjoiWEMzSEtWOUJWTUVSIiwiZXhwIjoxNjA2NDg4OTE3fQ.Pcv7il8-qVlBR4wxffVlFYlRA8CniPiMBzXvhml0Ryo",
+				"type": "string"
+			},
+			{
+				"key": "tokenType",
+				"value": "Bearer",
+				"type": "string"
+			}
+		]
 	},
 	"event": [
 		{

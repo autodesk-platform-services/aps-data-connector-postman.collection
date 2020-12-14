@@ -49,19 +49,13 @@ Postman is a popular tool that provides an easy-to-use interface to send HTTP re
 7. In context menu of collection >> **Edit**, switch to the tab **Authorization**. Click **Get New Access Token**, input the variables as below:
 
    - Grant Type ``Authorization Code``
-   
    - Callback URL  ``https://www.getpostman.com/oauth2/callback``
-
    - Auth URL  ``https://developer.api.autodesk.com/authentication/v1/authorize``
-
    - Access Token URL  ``https://developer.api.autodesk.com/authentication/v1/gettoken``
 
    - Client ID ``{{client_id}}``
-
    - Client Secret ``{{client_secret}}``
-
    - Scope ``data:read data:write data:create``
-
    - Client Authentication ``Send Client credentials body``
 
    <p align="center"><img src="./help/apiref-oauth2.png" width="800" ></p> 
@@ -79,10 +73,12 @@ Postman is a popular tool that provides an easy-to-use interface to send HTTP re
 2. Play the scripts. Try to change some parameters or body with more scenarios. 
    <p align="center"><img src="./help/collection.png" width="600" ></p>   
 
-
 ## Notes
-1.  
- 
+1.  If the request is submitted in UI, the **description** will be something like:
+   ```IQ Data Extraction for <your BIM360 account id>```
+2.  After a new request is created by API, it would take a few minutes until **GET:Request/jobs** returns jobs list. At the beginning, job will be __queued__, next take time to __running__, finally __complete__ or __fail__. So keep polling **GET:Request/jobs** until one job is available, and test the proceeding scripts.
+3. Watch callback endpoint or email to check the notification 
+
 
 ## License
 
