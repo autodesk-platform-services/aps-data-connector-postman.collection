@@ -62,7 +62,7 @@ Postman is a popular tool that provides an easy-to-use interface to send HTTP re
 
    <p align="center"><img src="./help/apiref-oauth2.png" width="800" ></p> 
  
- 8. Click **Request Token**, it will direct to login Autodesk account, after it succeeds, the token will be generated. Click **Use Token**. Then, click **Update** to close the window of **Edit**
+ 8. Click **Get New Access Token**, it will direct to login Autodesk account, after it succeeds, the token will be generated. Click **Use Token**. Then, click **Update** to close the window of **Edit**
    
    Data Connector API requires to work with 3-legged token. This collection takes **[Inheriting auth](https://learning.getpostman.com/docs/postman/sending-api-requests/authorization/#inheriting-auth)** to apply 3-legged token to every endpoint in the collection automatically, which means it does not need to input the token in the header explicitly.
 
@@ -78,7 +78,19 @@ Postman is a popular tool that provides an easy-to-use interface to send HTTP re
    ```IQ Data Extraction for <your BIM360 account id>```
 2.  After a new request is created by API, it would take a few minutes until **GET:Request/jobs** returns jobs list. At the beginning, job will be __queued__, next take time to __running__, finally __complete__ or __fail__. So keep polling **GET:Request/jobs** until one job is available, and test the proceeding scripts.
 3. Watch callback endpoint or email to check the notification 
+ 
+ 
+## Further Reading
+**Document**
+- [Data Connector Field Guid](https://forge.autodesk.com/en/docs/bim360/v1/overview/field-guide/data-connector/)
+- [Data Connector API Reference](https://forge.autodesk.com/en/docs/bim360/v1/reference/http/data-connector-requests-POST/)
 
+**Tutorials**:
+- [Data Connector Tutorial](https://forge.autodesk.com/en/docs/bim360/v1/tutorials/data-connector/)
+
+**Blogs**:
+- [Forge Blog](https://forge.autodesk.com/categories/bim-360-api)
+- [Field of View](https://fieldofviewblog.wordpress.com/), a BIM focused blog
 
 ## License
 
