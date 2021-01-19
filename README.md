@@ -2,7 +2,7 @@
 
 [![Postman](https://img.shields.io/badge/Postman-v7-orange.svg)](https://www.getpostman.com/)
 [![BIM-360 API](https://img.shields.io/badge/BIM%20360api-v1-green.svg)](https://forge.autodesk.com/en/docs/bim360/v1/overview/introduction/)
-[![Data Connector API](https://forge.autodesk.com/en/docs/bim360/v1/overview/field-guide/data-connector/)
+[![Data Connector API](https://img.shields.io/badge/Data%20Connector%20API-v1-yellowgreen)](https://forge.autodesk.com/en/docs/bim360/v1/overview/field-guide/data-connector/)
 
 ![Beginner](https://img.shields.io/badge/Level-Beginner-green.svg)
 [![License](https://img.shields.io/:license-MIT-blue.svg)](http://opensource.org/licenses/MIT)
@@ -63,10 +63,8 @@ Postman is a popular tool that provides an easy-to-use interface to send HTTP re
    <p align="center"><img src="./help/apiref-oauth2.png" width="800" ></p> 
  
  8. Click **Request Token**, it will direct to login Autodesk account, after it succeeds, the token will be generated. Click **Use Token**. Then, click **Update** to close the window of **Edit**
-
-   <p align="center"><img src="./help/token.png" width="600" ></p> 
    
-   RFI API requires to work with 3-legged token. This collection takes **[Inheriting auth](https://learning.getpostman.com/docs/postman/sending-api-requests/authorization/#inheriting-auth)** to apply 3-legged token to every endpoint in the collection automatically, which means it does not need to input the token in the header explicitly.
+   Data Connector API requires to work with 3-legged token. This collection takes **[Inheriting auth](https://learning.getpostman.com/docs/postman/sending-api-requests/authorization/#inheriting-auth)** to apply 3-legged token to every endpoint in the collection automatically, which means it does not need to input the token in the header explicitly.
 
 ## API Test
 
