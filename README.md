@@ -40,7 +40,7 @@ Postman is a popular tool that provides an easy-to-use interface to send HTTP re
 
 5.  Clone this repository or download it. It's recommended to install [GitHub Desktop](https://desktop.github.com/). To clone it via command line, use the following (**Terminal** on MacOSX/Linux, **Git Shell** on Windows):
 
-    ```git clone https://github.com/xiaodongliang/forge-bim360-data.connector.api-postman.collection```
+    ```git clone https://github.com/autodesk-forge/forge-bim360-data.connector.api-postman.collection```
 
 6. Import the collection and environment files to Postman
 
