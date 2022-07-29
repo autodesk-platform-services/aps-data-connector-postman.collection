@@ -12,12 +12,52 @@
 					"name": "GET DATA of Request",
 					"item": [
 						{
-							"name": "GET Requests",
+							"name": "01-GET Requests",
 							"event": [
 								{
 									"listen": "test",
 									"script": {
-										"id": "e880be7b-c7dc-42eb-bce5-80caa418a789",
+										"exec": [
+											"pm.test(\"Get requests collection - status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"find one request id\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    pm.expect(body.results.length).not.eq(0);",
+											"    pm.environment.set(\"request_id\", body.results[0].id);",
+											"    console.log(body); ",
+											"}); "
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"requests"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "02-Patch Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
 										"exec": [
 											"pm.test(\"Get requests collection - status code is 200\", function () {",
 											"    pm.response.to.have.status(200);",
@@ -36,8 +76,676 @@
 								}
 							],
 							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n        \"isActive\": true,\n        \"description\": \"Admin Data by Day\" \n}"
+								},
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests/{{request_id}}",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"requests",
+										"{{request_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "03-GET One Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Get one request- status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"find one request data\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    pm.expect(body).not.eq(undefined);",
+											"    console.log(body);",
+											"}); "
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
 								"method": "GET",
 								"header": [],
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests/{{request_id}}",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"requests",
+										"{{request_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "04-GET All Jobs associated with the authenticated user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Get one request jobs- status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"find one id of complete and success job\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    var find = body.results.find(d=>d.status == \"complete\" && d.completionStatus == \"success\" )",
+											"    pm.expect(find).not.eq(undefined);",
+											"    pm.environment.set(\"job_id\", find.id);",
+											"    console.log(find); ",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"jobs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "04-GET One Request Jobs",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Get one request jobs- status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"find one id of complete and success job\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    var find = body.results.find(d=>d.status == \"complete\" && d.completionStatus == \"success\" )",
+											"    pm.expect(find).not.eq(undefined);",
+											"    pm.environment.set(\"job_id\", find.id);",
+											"    console.log(find); ",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests/{{request_id}}/jobs",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"requests",
+										"{{request_id}}",
+										"jobs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "05-GET One Job",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"GET One Request One Job- status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"find one job data\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    pm.expect(body).not.eq(undefined);",
+											"    console.log(body);",
+											"}); "
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"jobs",
+										"{{job_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "06-GET One Job Data List",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"GET One Job Data List- status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"find readme html\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    var find = body.find(d=>d.name == \"README.html\" )",
+											"    pm.expect(find).not.eq(undefined);",
+											"    pm.environment.set(\"readme_key\", find.name); ",
+											"    console.log(find); ",
+											"});",
+											"",
+											"pm.test(\"find data zip\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    var find = body.find(d=>d.name == \"autodesk_data_extract.zip\" )",
+											"    pm.expect(find).not.eq(undefined);",
+											"    pm.environment.set(\"data_zip_key\", find.name);",
+											"    console.log(find); ",
+											"});",
+											"",
+											"pm.test(\"find one csv \", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    var find = body.find(d=>d.name.includes(\".csv\") )",
+											"    pm.expect(find).not.eq(undefined);",
+											"    pm.environment.set(\"one_csv_key\", find.name);",
+											"    console.log(find); ",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}/data-listing",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"jobs",
+										"{{job_id}}",
+										"data-listing"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "07-GET Reame.html signed url and headers",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"GET Reame.html signed url and headers - status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"get signed url and headers of readme html\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    pm.expect(body.signedUrl).not.eq(undefined);",
+											"",
+											"    var sections = body.signedUrl.split(\"?\"); ",
+											"        pm.environment.set(\"signed_url\", sections[0]);  ",
+											"",
+											"    var params = sections[1].split(\"&\");",
+											"    pm.environment.set(\"AWSAccessKeyId\", params[0].split(\"=\")[1]);",
+											"    pm.environment.set(\"Expires\", params[1].split(\"=\")[1]); ",
+											"    pm.environment.set(\"Signature\", params[2].split(\"=\")[1]);",
+											"    pm.environment.set(\"x-amz-security-token\", params[3].split(\"=\")[1]);",
+											"",
+											"    console.log(body);",
+											"}); "
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}/data/{{readme_key}}",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"jobs",
+										"{{job_id}}",
+										"data",
+										"{{readme_key}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "08-GET Reame.html Content",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"GET Reame.html Content - status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{signed_url}}?AWSAccessKeyId={{AWSAccessKeyId}}&Expires={{Expires}}&Signature={{Signature}}&x-amz-security-token={{x-amz-security-token}}",
+									"host": [
+										"{{signed_url}}"
+									],
+									"query": [
+										{
+											"key": "AWSAccessKeyId",
+											"value": "{{AWSAccessKeyId}}"
+										},
+										{
+											"key": "Expires",
+											"value": "{{Expires}}"
+										},
+										{
+											"key": "Signature",
+											"value": "{{Signature}}"
+										},
+										{
+											"key": "x-amz-security-token",
+											"value": "{{x-amz-security-token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "09-GET One CSV signed url and headers",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"GET One CSV signed url and headers - status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"get signed url and headers of readme html\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    pm.expect(body.signedUrl).not.eq(undefined);",
+											"",
+											"    var sections = body.signedUrl.split(\"?\"); ",
+											"        pm.environment.set(\"signed_url\", sections[0]);  ",
+											"",
+											"    var params = sections[1].split(\"&\");",
+											"    pm.environment.set(\"AWSAccessKeyId\", params[0].split(\"=\")[1]);",
+											"    pm.environment.set(\"Expires\", params[1].split(\"=\")[1]); ",
+											"    pm.environment.set(\"Signature\", params[2].split(\"=\")[1]);",
+											"    pm.environment.set(\"x-amz-security-token\", params[3].split(\"=\")[1]);",
+											"",
+											"    console.log(body);",
+											"}); "
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}/data/{{one_csv_key}}",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"jobs",
+										"{{job_id}}",
+										"data",
+										"{{one_csv_key}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "10-GET One CSV contents",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"GET One CSV contents - status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{signed_url}}?AWSAccessKeyId={{AWSAccessKeyId}}&Expires={{Expires}}&Signature={{Signature}}&x-amz-security-token={{x-amz-security-token}}",
+									"host": [
+										"{{signed_url}}"
+									],
+									"query": [
+										{
+											"key": "AWSAccessKeyId",
+											"value": "{{AWSAccessKeyId}}"
+										},
+										{
+											"key": "Expires",
+											"value": "{{Expires}}"
+										},
+										{
+											"key": "Signature",
+											"value": "{{Signature}}"
+										},
+										{
+											"key": "x-amz-security-token",
+											"value": "{{x-amz-security-token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "11-GET Data.zip signed url and headers",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"GET Data.zip signed url and headers - status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"get signed url and headers of readme html\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    pm.expect(body.signedUrl).not.eq(undefined);",
+											"",
+											"    var sections = body.signedUrl.split(\"?\"); ",
+											"        pm.environment.set(\"signed_url\", sections[0]);  ",
+											"",
+											"    var params = sections[1].split(\"&\");",
+											"    pm.environment.set(\"AWSAccessKeyId\", params[0].split(\"=\")[1]);",
+											"    pm.environment.set(\"Expires\", params[1].split(\"=\")[1]); ",
+											"    pm.environment.set(\"Signature\", params[2].split(\"=\")[1]);",
+											"    pm.environment.set(\"x-amz-security-token\", params[3].split(\"=\")[1]);",
+											"",
+											"    console.log(body);",
+											"}); "
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}/data/{{data_zip_key}}",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"jobs",
+										"{{job_id}}",
+										"data",
+										"{{data_zip_key}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "12-GET Data.zip Contents",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"GET Data.zip Contents - status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{signed_url}}?AWSAccessKeyId={{AWSAccessKeyId}}&Expires={{Expires}}&Signature={{Signature}}&x-amz-security-token={{x-amz-security-token}}",
+									"host": [
+										"{{signed_url}}"
+									],
+									"query": [
+										{
+											"key": "AWSAccessKeyId",
+											"value": "{{AWSAccessKeyId}}"
+										},
+										{
+											"key": "Expires",
+											"value": "{{Expires}}"
+										},
+										{
+											"key": "Signature",
+											"value": "{{Signature}}"
+										},
+										{
+											"key": "x-amz-security-token",
+											"value": "{{x-amz-security-token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "13-Delete one request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests/{{request_id}}",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"requests",
+										"{{request_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CREATE REQUEST and GET DATA",
+					"item": [
+						{
+							"name": "01-Create One_Time Request-Account Level",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Create One_Time Request- status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"find request id\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    pm.expect(body).not.eq(undefined);",
+											"    pm.environment.set(\"request_id\", body.id);",
+											"",
+											"    console.log(body);",
+											"}); "
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var d = new Date()",
+											"var current_time = d.getFullYear() ",
+											"                +\"-\" + ((\"0\" + (d.getUTCMonth()+1)).slice(-2) )",
+											"                + \"-\" +  (\"0\" + d.getUTCDate()).slice(-2) ",
+											"                + \"T\" +(\"0\" + d.getUTCHours()).slice(-2) ",
+											"                + \":\" + (\"0\" + d.getUTCMinutes()).slice(-2) ",
+											"                + \":\" + (\"0\" + d.getUTCSeconds()).slice(-2) ",
+											"                + \".000Z\"",
+											"pm.environment.set(\"current_time\", current_time);",
+											"",
+											"d.setUTCMinutes(d.getUTCMinutes()-2) // start execute after 2 minutes",
+											"",
+											"var effective_from = d.getUTCFullYear() ",
+											"                +\"-\" + ((\"0\" + (d.getUTCMonth()+1)).slice(-2) )",
+											"                + \"-\" +  (\"0\" + d.getUTCDate()).slice(-2) ",
+											"                + \"T\" +(\"0\" + d.getUTCHours()).slice(-2) ",
+											"                + \":\" + (\"0\" + d.getUTCMinutes()).slice(-2)",
+											"                + \":\" + (\"0\" + d.getUTCSeconds()).slice(-2) ",
+											"                + \".000Z\"",
+											"pm.environment.set(\"effective_from\", effective_from);",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}",
+										"disabled": true
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"description\":\"Test by API - {{current_time}}\",\r\n    \"isActive\": true, \r\n    \"scheduleInterval\": \"ONE_TIME\",\r\n    \"serviceGroups\": [ \r\n        \"issues\" ,\r\n        \"dailylogs\"\r\n        //\"all\"  // if all only, fetch data of all services\r\n\r\n    ],  \r\n    \"effectiveFrom\": \"{{effective_from}}\",\r\n    \"callbackUrl\": \"{{callbackUrl}}\"\r\n}"
+								},
 								"url": {
 									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests",
 									"host": [
@@ -46,6 +754,1164 @@
 									"path": [
 										"data-connector",
 										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"requests"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "01-Create One_Time Request - Project Level",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Create One_Time Request- status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"find request id\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    pm.expect(body).not.eq(undefined);",
+											"    pm.environment.set(\"request_id\", body.id);",
+											"",
+											"    console.log(body);",
+											"}); "
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var d = new Date()",
+											"var current_time = d.getFullYear() ",
+											"                +\"-\" + ((\"0\" + (d.getUTCMonth()+1)).slice(-2) )",
+											"                + \"-\" +  (\"0\" + d.getUTCDate()).slice(-2) ",
+											"                + \"T\" +(\"0\" + d.getUTCHours()).slice(-2) ",
+											"                + \":\" + (\"0\" + d.getUTCMinutes()).slice(-2) ",
+											"                + \":\" + (\"0\" + d.getUTCSeconds()).slice(-2) ",
+											"                + \".000Z\"",
+											"pm.environment.set(\"current_time\", current_time);",
+											"",
+											"d.setUTCMinutes(d.getUTCMinutes()-2) // start execute after 2 minutes",
+											"",
+											"var effective_from = d.getUTCFullYear() ",
+											"                +\"-\" + ((\"0\" + (d.getUTCMonth()+1)).slice(-2) )",
+											"                + \"-\" +  (\"0\" + d.getUTCDate()).slice(-2) ",
+											"                + \"T\" +(\"0\" + d.getUTCHours()).slice(-2) ",
+											"                + \":\" + (\"0\" + d.getUTCMinutes()).slice(-2)",
+											"                + \":\" + (\"0\" + d.getUTCSeconds()).slice(-2) ",
+											"                + \".000Z\"",
+											"pm.environment.set(\"effective_from\", effective_from);",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}",
+										"disabled": true
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"description\":\"Test by API - {{current_time}}\",\r\n    \"isActive\": true, \r\n    \"scheduleInterval\": \"ONE_TIME\",\r\n    \"serviceGroups\": [ \r\n        \"issues\" ,\r\n        \"dailylogs\"\r\n         //\"all\"  // if all only, fetch data of all services\r\n\r\n    ],  \r\n    \"effectiveFrom\": \"{{effective_from}}\",\r\n    \"callbackUrl\": \"{{callbackUrl}}\",\r\n    \"projectId\":\"{{project_id}}\"\r\n}"
+								},
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"requests"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "01-Create DAY Request-Account Level",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Create One_Time Request- status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"find request id\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    pm.expect(body).not.eq(undefined);",
+											"    pm.environment.set(\"request_id\", body.id);",
+											"",
+											"    console.log(body);",
+											"}); "
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var d = new Date()",
+											"var current_time = d.getFullYear() ",
+											"                +\"-\" + ((\"0\" + (d.getUTCMonth()+1)).slice(-2) )",
+											"                + \"-\" +  (\"0\" + d.getUTCDate()).slice(-2) ",
+											"                + \"T\" +(\"0\" + d.getUTCHours()).slice(-2) ",
+											"                + \":\" + (\"0\" + d.getUTCMinutes()).slice(-2) ",
+											"                + \":\" + (\"0\" + d.getUTCSeconds()).slice(-2) ",
+											"                + \".000Z\"",
+											"pm.environment.set(\"current_time\", current_time);",
+											"",
+											"d.setUTCMinutes(d.getUTCMinutes()+2) // start execute after 2 minutes",
+											"",
+											"var effective_from = d.getUTCFullYear() ",
+											"                +\"-\" + ((\"0\" + (d.getUTCMonth()+1)).slice(-2) )",
+											"                + \"-\" +  (\"0\" + d.getUTCDate()).slice(-2) ",
+											"                + \"T\" +(\"0\" + d.getUTCHours()).slice(-2) ",
+											"                + \":\" + (\"0\" + d.getUTCMinutes()).slice(-2)",
+											"                + \":\" + (\"0\" + d.getUTCSeconds()).slice(-2) ",
+											"                + \".000Z\"",
+											"pm.environment.set(\"effective_from\", effective_from);",
+											"",
+											"d.setUTCDate(d.getUTCDate()+10) // end execute after 10 days",
+											"",
+											"var effective_to = d.getUTCFullYear() ",
+											"                +\"-\" + ((\"0\" + (d.getUTCMonth()+1)).slice(-2) )",
+											"                + \"-\" +  (\"0\" + d.getUTCDate()).slice(-2) ",
+											"                + \"T\" +(\"0\" + d.getUTCHours()).slice(-2) ",
+											"                + \":\" + (\"0\" + d.getUTCMinutes()).slice(-2)",
+											"                + \":\" + (\"0\" + d.getUTCSeconds()).slice(-2) ",
+											"                + \".000Z\"",
+											"pm.environment.set(\"effective_to\", effective_to);",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}",
+										"disabled": true
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"description\":\"Test by API - {{current_time}}\",\r\n    \"isActive\": true, \r\n    \"scheduleInterval\": \"WEEK\",\r\n    \"reoccuringInterval\": 1,   \r\n    \"serviceGroups\": [ \r\n        \"issues\",\r\n        \"dailylogs\" \r\n         //\"all\"  // if all only, fetch data of all services\r\n\r\n    ],  \r\n    \"effectiveFrom\": \"{{effective_from}}\",\r\n    \"effectiveTo\": \"{{effective_to}}\", \r\n    \"callbackUrl\": \"{{callbackUrl}}\"\r\n}"
+								},
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"requests"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "01-Create WEEK Request - Project Level",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Create One_Time Request- status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"find request id\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    pm.expect(body).not.eq(undefined);",
+											"    pm.environment.set(\"request_id\", body.id);",
+											"",
+											"    console.log(body);",
+											"}); "
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var d = new Date()",
+											"var current_time = d.getFullYear() ",
+											"                +\"-\" + ((\"0\" + (d.getUTCMonth()+1)).slice(-2) )",
+											"                + \"-\" +  (\"0\" + d.getUTCDate()).slice(-2) ",
+											"                + \"T\" +(\"0\" + d.getUTCHours()).slice(-2) ",
+											"                + \":\" + (\"0\" + d.getUTCMinutes()).slice(-2) ",
+											"                + \":\" + (\"0\" + d.getUTCSeconds()).slice(-2) ",
+											"                + \".000Z\"",
+											"pm.environment.set(\"current_time\", current_time);",
+											"",
+											"d.setUTCMinutes(d.getUTCMinutes()+2) // start execute after 2 minutes",
+											"",
+											"var effective_from = d.getUTCFullYear() ",
+											"                +\"-\" + ((\"0\" + (d.getUTCMonth()+1)).slice(-2) )",
+											"                + \"-\" +  (\"0\" + d.getUTCDate()).slice(-2) ",
+											"                + \"T\" +(\"0\" + d.getUTCHours()).slice(-2) ",
+											"                + \":\" + (\"0\" + d.getUTCMinutes()).slice(-2)",
+											"                + \":\" + (\"0\" + d.getUTCSeconds()).slice(-2) ",
+											"                + \".000Z\"",
+											"pm.environment.set(\"effective_from\", effective_from);",
+											"",
+											"d.setUTCDate(d.getUTCDate()+10) // end execute after 10 days",
+											"",
+											"var effective_to = d.getUTCFullYear() ",
+											"                +\"-\" + ((\"0\" + (d.getUTCMonth()+1)).slice(-2) )",
+											"                + \"-\" +  (\"0\" + d.getUTCDate()).slice(-2) ",
+											"                + \"T\" +(\"0\" + d.getUTCHours()).slice(-2) ",
+											"                + \":\" + (\"0\" + d.getUTCMinutes()).slice(-2)",
+											"                + \":\" + (\"0\" + d.getUTCSeconds()).slice(-2) ",
+											"                + \".000Z\"",
+											"pm.environment.set(\"effective_to\", effective_to);",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}",
+										"disabled": true
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"description\":\"Test by API - {{current_time}} by project id\",\r\n    \"isActive\": true, \r\n    \"scheduleInterval\": \"WEEK\",\r\n    \"reoccuringInterval\": 1,   \r\n    \"serviceGroups\": [ \r\n        \"issues\" \r\n         //\"all\"  // if all only, fetch data of all services\r\n    ],  \r\n    \"effectiveFrom\": \"{{effective_from}}\",\r\n    \"effectiveTo\": \"{{effective_to}}\", \r\n    \"callbackUrl\": \"{{callbackUrl}}\",\r\n    \"projectId\":\"{{projectId}}\"\r\n}"
+								},
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"requests"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "02-GET One Request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Get one request- status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"find one request data\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    pm.expect(body).not.eq(undefined);",
+											"    pm.environment.set(\"current_time\", current_time);",
+											"    console.log(body);",
+											"}); "
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests/{{request_id}}",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"requests",
+										"{{request_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "03-GET One Request Jobs",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Get one request jobs- status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"find one id of complete and success job\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    var find = body.results.find(d=>d.status == \"complete\" && d.completionStatus == \"success\" )",
+											"    pm.expect(find).not.eq(undefined);",
+											"    pm.environment.set(\"job_id\", find.id);",
+											"    console.log(find); ",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests/{{request_id}}/jobs",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"requests",
+										"{{request_id}}",
+										"jobs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "04-GET One Job",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"GET One Request One Job- status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"find one job data\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    pm.expect(body).not.eq(undefined);",
+											"    console.log(body);",
+											"}); "
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"jobs",
+										"{{job_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "05-GET One Job Data List",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"GET One Job Data List- status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"find readme html\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    var find = body.find(d=>d.name == \"README.html\" )",
+											"    pm.expect(find).not.eq(undefined);",
+											"    pm.environment.set(\"readme_key\", find.name); ",
+											"    console.log(find); ",
+											"});",
+											"",
+											"pm.test(\"find data zip\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    var find = body.find(d=>d.name == \"autodesk_data_extract.zip\" )",
+											"    pm.expect(find).not.eq(undefined);",
+											"    pm.environment.set(\"data_zip_key\", find.name);",
+											"    console.log(find); ",
+											"});",
+											"",
+											"pm.test(\"find one csv \", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    var find = body.find(d=>d.name.includes(\".csv\") )",
+											"    pm.expect(find).not.eq(undefined);",
+											"    pm.environment.set(\"one_csv_key\", find.name);",
+											"    console.log(find); ",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}/data-listing",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"jobs",
+										"{{job_id}}",
+										"data-listing"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "06-GET Reame.html signed url and headers",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"GET Reame.html signed url and headers - status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"get signed url and headers of readme html\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    pm.expect(body.signedUrl).not.eq(undefined);",
+											"",
+											"    var sections = body.signedUrl.split(\"?\"); ",
+											"        pm.environment.set(\"signed_url\", sections[0]);  ",
+											"",
+											"    var params = sections[1].split(\"&\");",
+											"    pm.environment.set(\"AWSAccessKeyId\", params[0].split(\"=\")[1]);",
+											"    pm.environment.set(\"Expires\", params[1].split(\"=\")[1]); ",
+											"    pm.environment.set(\"Signature\", params[2].split(\"=\")[1]);",
+											"    pm.environment.set(\"x-amz-security-token\", params[3].split(\"=\")[1]);",
+											"",
+											"    console.log(body);",
+											"}); "
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}/data/{{readme_key}}",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"jobs",
+										"{{job_id}}",
+										"data",
+										"{{readme_key}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "07-GET Reame.html Content",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"GET Reame.html Content - status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{signed_url}}?AWSAccessKeyId={{AWSAccessKeyId}}&Expires={{Expires}}&Signature={{Signature}}&x-amz-security-token={{x-amz-security-token}}",
+									"host": [
+										"{{signed_url}}"
+									],
+									"query": [
+										{
+											"key": "AWSAccessKeyId",
+											"value": "{{AWSAccessKeyId}}"
+										},
+										{
+											"key": "Expires",
+											"value": "{{Expires}}"
+										},
+										{
+											"key": "Signature",
+											"value": "{{Signature}}"
+										},
+										{
+											"key": "x-amz-security-token",
+											"value": "{{x-amz-security-token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "08-GET Reame.html Content",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"GET Reame.html Content - status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{signed_url}}?AWSAccessKeyId={{AWSAccessKeyId}}&Expires={{Expires}}&Signature={{Signature}}&x-amz-security-token={{x-amz-security-token}}",
+									"host": [
+										"{{signed_url}}"
+									],
+									"query": [
+										{
+											"key": "AWSAccessKeyId",
+											"value": "{{AWSAccessKeyId}}"
+										},
+										{
+											"key": "Expires",
+											"value": "{{Expires}}"
+										},
+										{
+											"key": "Signature",
+											"value": "{{Signature}}"
+										},
+										{
+											"key": "x-amz-security-token",
+											"value": "{{x-amz-security-token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "09-GET One CSV signed url and headers",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"GET One CSV signed url and headers - status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"get signed url and headers of readme html\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    pm.expect(body.signedUrl).not.eq(undefined);",
+											"",
+											"    var sections = body.signedUrl.split(\"?\"); ",
+											"        pm.environment.set(\"signed_url\", sections[0]);  ",
+											"",
+											"    var params = sections[1].split(\"&\");",
+											"    pm.environment.set(\"AWSAccessKeyId\", params[0].split(\"=\")[1]);",
+											"    pm.environment.set(\"Expires\", params[1].split(\"=\")[1]); ",
+											"    pm.environment.set(\"Signature\", params[2].split(\"=\")[1]);",
+											"    pm.environment.set(\"x-amz-security-token\", params[3].split(\"=\")[1]);",
+											"",
+											"    console.log(body);",
+											"}); "
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}/data/{{one_csv_key}}",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"jobs",
+										"{{job_id}}",
+										"data",
+										"{{one_csv_key}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "10-GET One CSV contents",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"GET One CSV contents - status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{signed_url}}?AWSAccessKeyId={{AWSAccessKeyId}}&Expires={{Expires}}&Signature={{Signature}}&x-amz-security-token={{x-amz-security-token}}",
+									"host": [
+										"{{signed_url}}"
+									],
+									"query": [
+										{
+											"key": "AWSAccessKeyId",
+											"value": "{{AWSAccessKeyId}}"
+										},
+										{
+											"key": "Expires",
+											"value": "{{Expires}}"
+										},
+										{
+											"key": "Signature",
+											"value": "{{Signature}}"
+										},
+										{
+											"key": "x-amz-security-token",
+											"value": "{{x-amz-security-token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "11-GET Data.zip signed url and headers",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"GET Data.zip signed url and headers - status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"get signed url and headers of readme html\", function () {",
+											"    var body = JSON.parse(responseBody);",
+											"    pm.expect(body.signedUrl).not.eq(undefined);",
+											"",
+											"    var sections = body.signedUrl.split(\"?\"); ",
+											"        pm.environment.set(\"signed_url\", sections[0]);  ",
+											"",
+											"    var params = sections[1].split(\"&\");",
+											"    pm.environment.set(\"AWSAccessKeyId\", params[0].split(\"=\")[1]);",
+											"    pm.environment.set(\"Expires\", params[1].split(\"=\")[1]); ",
+											"    pm.environment.set(\"Signature\", params[2].split(\"=\")[1]);",
+											"    pm.environment.set(\"x-amz-security-token\", params[3].split(\"=\")[1]);",
+											"",
+											"    console.log(body);",
+											"}); "
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/jobs/{{job_id}}/data/{{data_zip_key}}",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"jobs",
+										"{{job_id}}",
+										"data",
+										"{{data_zip_key}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "12-GET Data.zip Contents",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"GET Data.zip Contents - status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{signed_url}}?AWSAccessKeyId={{AWSAccessKeyId}}&Expires={{Expires}}&Signature={{Signature}}&x-amz-security-token={{x-amz-security-token}}",
+									"host": [
+										"{{signed_url}}"
+									],
+									"query": [
+										{
+											"key": "AWSAccessKeyId",
+											"value": "{{AWSAccessKeyId}}"
+										},
+										{
+											"key": "Expires",
+											"value": "{{Expires}}"
+										},
+										{
+											"key": "Signature",
+											"value": "{{Signature}}"
+										},
+										{
+											"key": "x-amz-security-token",
+											"value": "{{x-amz-security-token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "13-PATCH one request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var d = new Date()",
+											"var current_time = d.getFullYear() ",
+											"                +\"-\" + ((\"0\" + (d.getUTCMonth()+1)).slice(-2) )",
+											"                + \"-\" +  (\"0\" + d.getUTCDate()).slice(-2) ",
+											"                + \"T\" +(\"0\" + d.getUTCHours()).slice(-2) ",
+											"                + \":\" + (\"0\" + d.getUTCMinutes()).slice(-2) ",
+											"                + \":\" + (\"0\" + d.getUTCSeconds()).slice(-2) ",
+											"                + \".000Z\"",
+											"pm.environment.set(\"current_time\", current_time);",
+											"",
+											"d.setUTCMinutes(d.getUTCMinutes()-2) // start execute after 2 minutes",
+											"",
+											"var effective_from = d.getUTCFullYear() ",
+											"                +\"-\" + ((\"0\" + (d.getUTCMonth()+1)).slice(-2) )",
+											"                + \"-\" +  (\"0\" + d.getUTCDate()).slice(-2) ",
+											"                + \"T\" +(\"0\" + d.getUTCHours()).slice(-2) ",
+											"                + \":\" + (\"0\" + d.getUTCMinutes()).slice(-2)",
+											"                + \":\" + (\"0\" + d.getUTCSeconds()).slice(-2) ",
+											"                + \".000Z\"",
+											"pm.environment.set(\"effective_from\", effective_from);",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}",
+										"disabled": true
+									},
+									{
+										"key": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"description\": \"Updated Description\",\r\n  \"isActive\": false,\r\n    \"scheduleInterval\": \"ONE_TIME\",\r\n     \"serviceGroups\": [ \r\n        \"issues\" ,\r\n        \"dailylogs\"\r\n    ],  \r\n    \"effectiveFrom\": \"{{effective_from}}\",\r\n    \"callbackUrl\": \"{{callbackUrl}}\",\r\n    \"projectId\":\"3ff04907-38e4-41e4-8914-0bf63ae97d3d\"\r\n\r\n\r\n}"
+								},
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests/{{request_id}}",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"requests",
+										"{{request_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "14-Delete one request",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests/{{request_id}}",
+									"host": [
+										"{{base_domain}}"
+									],
+									"path": [
+										"data-connector",
+										"v1",
+										"accounts",
+										"{{hub_id_b360}}",
+										"requests",
+										"{{request_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "backup-GET User Profile - verfify authenticated user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_domain}}/userprofile/v1/users/@me",
+					"host": [
+						"{{base_domain}}"
+					],
+					"path": [
+						"userprofile",
+						"v1",
+						"users",
+						"@me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "backup- authentication-2 legged token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"access_token\", data.access_token);",
+							"postman.setEnvironmentVariable(\"expires_in\", data.expires_in);",
+							"postman.setEnvironmentVariable(\"token_type\", data.token_type);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "{{client_id}}",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "{{client_secret}}",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "data:read data:write bucket:create bucket:read account:read bucket:delete code:all",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_domain}}/authentication/v1/authenticate",
+					"host": [
+						"{{base_domain}}"
+					],
+					"path": [
+						"authentication",
+						"v1",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "scope",
+				"value": "data:read data:write data:create",
+				"type": "string"
+			},
+			{
+				"key": "tokenName",
+				"value": "access_token",
+				"type": "string"
+			},
+			{
+				"key": "challengeAlgorithm",
+				"value": "S256",
+				"type": "string"
+			},
+			{
+				"key": "redirect_uri",
+				"value": "https://www.getpostman.com/oauth2/callback",
+				"type": "string"
+			},
+			{
+				"key": "grant_type",
+				"value": "authorization_code",
+				"type": "string"
+			},
+			{
+				"key": "clientSecret",
+				"value": "{{client_secret}}",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "{{client_id}}",
+				"type": "string"
+			},
+			{
+				"key": "authUrl",
+				"value": "https://developer.api.autodesk.com/authentication/v1/authorize",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "client_authentication",
+				"value": "body",
+				"type": "string"
+			},
+			{
+				"key": "accessTokenUrl",
+				"value": "https://developer.api.autodesk.com/authentication/v1/gettoken",
+				"type": "string"
+			},
+			{
+				"key": "accessToken",
+				"value": "eyJhbGciOiJIUzI1NiIsImtpZCI6Imp3dF9zeW1tZXRyaWNfa2V5In0.eyJzY29wZSI6WyJkYXRhOnJlYWQiLCJkYXRhOndyaXRlIiwiYWNjb3VudDpyZWFkIiwiYnVja2V0OnJlYWQiLCJkYXRhOmNyZWF0ZSJdLCJjbGllbnRfaWQiOiJxWTBlQTQwSzdMclhXZVFaSmRETXVYTGgxOEhQV0RFMCIsImdyYW50X2lkIjoiU1dGOGNJOUxNajVhWENrVndYcVVFdnp2eVROUUJLYVUiLCJhdWQiOiJodHRwczovL2F1dG9kZXNrLmNvbS9hdWQvand0ZXhwNjAiLCJqdGkiOiJ2MHAzZWhheWJsNWNHN2FTM3MyMkIyMVpEV1RrdEhBdzdnT0pMM3dnNWQ5aHRzR3IwMmJkbHZjS2dETktsNlo0IiwidXNlcmlkIjoiWEMzSEtWOUJWTUVSIiwiZXhwIjoxNjA2NDg4OTE3fQ.Pcv7il8-qVlBR4wxffVlFYlRA8CniPiMBzXvhml0Ryo",
+				"type": "string"
+			},
+			{
+				"key": "tokenType",
+				"value": "Bearer",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}	"v1",
 										"accounts",
 										"{{hub_id_b360}}",
 										"requests"
@@ -1313,263 +3179,4 @@
 						{
 							"name": "Delete one request",
 							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "b06ee0b5-7541-4219-90aa-5a83a17d55ac",
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "{{base_domain}}/data-connector/v1/accounts/{{hub_id_b360}}/requests/{{request_id}}",
-									"host": [
-										"{{base_domain}}"
-									],
-									"path": [
-										"data-connector",
-										"v1",
-										"accounts",
-										"{{hub_id_b360}}",
-										"requests",
-										"{{request_id}}"
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "43691c71-9f51-412c-8123-8488942de1e1",
-								"type": "text/javascript",
-								"exec": [
-									""
-								]
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"id": "fd1bfa21-21ce-4d45-884a-71fbcec46429",
-								"type": "text/javascript",
-								"exec": [
-									""
-								]
-							}
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "backup-GET User@ME",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "82b252fb-862b-40b9-94b2-a6dcfc2166f2",
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{base_domain}}/userprofile/v1/users/@me",
-					"host": [
-						"{{base_domain}}"
-					],
-					"path": [
-						"userprofile",
-						"v1",
-						"users",
-						"@me"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "backup- authentication-2 legged token",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "da1fbda6-a205-4708-84bb-1dec055361a7",
-						"exec": [
-							"var data = JSON.parse(responseBody);",
-							"postman.setEnvironmentVariable(\"access_token\", data.access_token);",
-							"postman.setEnvironmentVariable(\"expires_in\", data.expires_in);",
-							"postman.setEnvironmentVariable(\"token_type\", data.token_type);"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded"
-					}
-				],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "client_id",
-							"value": "{{client_id}}",
-							"type": "text"
-						},
-						{
-							"key": "client_secret",
-							"value": "{{client_secret}}",
-							"type": "text"
-						},
-						{
-							"key": "grant_type",
-							"value": "client_credentials",
-							"type": "text"
-						},
-						{
-							"key": "scope",
-							"value": "data:read data:write bucket:create bucket:read account:read bucket:delete code:all",
-							"type": "text"
-						},
-						{
-							"key": "",
-							"value": "",
-							"type": "text",
-							"disabled": true
-						}
-					],
-					"options": {
-						"urlencoded": {}
-					}
-				},
-				"url": {
-					"raw": "{{base_domain}}/authentication/v1/authenticate",
-					"host": [
-						"{{base_domain}}"
-					],
-					"path": [
-						"authentication",
-						"v1",
-						"authenticate"
-					]
-				}
-			},
-			"response": []
-		}
-	],
-	"auth": {
-		"type": "oauth2",
-		"oauth2": [
-			{
-				"key": "scope",
-				"value": "data:read data:write data:create",
-				"type": "string"
-			},
-			{
-				"key": "tokenName",
-				"value": "access_token",
-				"type": "string"
-			},
-			{
-				"key": "challengeAlgorithm",
-				"value": "S256",
-				"type": "string"
-			},
-			{
-				"key": "redirect_uri",
-				"value": "https://www.getpostman.com/oauth2/callback",
-				"type": "string"
-			},
-			{
-				"key": "grant_type",
-				"value": "authorization_code",
-				"type": "string"
-			},
-			{
-				"key": "clientSecret",
-				"value": "{{client_secret}}",
-				"type": "string"
-			},
-			{
-				"key": "clientId",
-				"value": "{{client_id}}",
-				"type": "string"
-			},
-			{
-				"key": "authUrl",
-				"value": "https://developer.api.autodesk.com/authentication/v1/authorize",
-				"type": "string"
-			},
-			{
-				"key": "addTokenTo",
-				"value": "header",
-				"type": "string"
-			},
-			{
-				"key": "client_authentication",
-				"value": "body",
-				"type": "string"
-			},
-			{
-				"key": "accessTokenUrl",
-				"value": "https://developer.api.autodesk.com/authentication/v1/gettoken",
-				"type": "string"
-			},
-			{
-				"key": "accessToken",
-				"value": "eyJhbGciOiJIUzI1NiIsImtpZCI6Imp3dF9zeW1tZXRyaWNfa2V5In0.eyJzY29wZSI6WyJkYXRhOnJlYWQiLCJkYXRhOndyaXRlIiwiYWNjb3VudDpyZWFkIiwiYnVja2V0OnJlYWQiLCJkYXRhOmNyZWF0ZSJdLCJjbGllbnRfaWQiOiJxWTBlQTQwSzdMclhXZVFaSmRETXVYTGgxOEhQV0RFMCIsImdyYW50X2lkIjoiU1dGOGNJOUxNajVhWENrVndYcVVFdnp2eVROUUJLYVUiLCJhdWQiOiJodHRwczovL2F1dG9kZXNrLmNvbS9hdWQvand0ZXhwNjAiLCJqdGkiOiJ2MHAzZWhheWJsNWNHN2FTM3MyMkIyMVpEV1RrdEhBdzdnT0pMM3dnNWQ5aHRzR3IwMmJkbHZjS2dETktsNlo0IiwidXNlcmlkIjoiWEMzSEtWOUJWTUVSIiwiZXhwIjoxNjA2NDg4OTE3fQ.Pcv7il8-qVlBR4wxffVlFYlRA8CniPiMBzXvhml0Ryo",
-				"type": "string"
-			},
-			{
-				"key": "tokenType",
-				"value": "Bearer",
-				"type": "string"
-			}
-		]
-	},
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"id": "61c72f80-e2ed-48ec-99de-7025c1e2c441",
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"id": "a56cc933-93e8-4de5-b35f-2e89249b1bb7",
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		}
-	],
-	"protocolProfileBehavior": {}
-}
+								
