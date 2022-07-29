@@ -9,6 +9,12 @@
 
 ## Description
 
+Change Log:
+  - 7/29/2022: project level access is supported
+  - 7/29/2022: Get:jobs (all jobs with this user) is provided
+  - 7/29/2022: "all" to fetch data of all services.
+
+
 This repository provides demos for the category of [BIM360 Data Connector API](TBD) . Right now, the APIs can:
  - Create requests with the scheduleInterval: one time, by day, by week, by month or by year
  - Get requests collection, single request, jobs of request
