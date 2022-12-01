@@ -9,23 +9,13 @@
 
 ## Description
 
-Change Log:
-  - 7/29/2022: project level access is supported
-  - 7/29/2022: Get:jobs (all jobs with this user) is provided
-  - 7/29/2022: "all" to fetch data of all services.
-
-
-This repository provides demos for the category of [BIM360 Data Connector API](TBD) . Right now, the APIs can:
- - Create requests with the scheduleInterval: one time, by day, by week, by month or by year
- - Get requests collection, single request, jobs of request
- - Get single job, extracted data list, and signed url of extracted data
- - Patch or delete request
+This repository provides demos for [Data Connector API](https://forge.autodesk.com/blog/bim-360-data-connector-api-available-public-beta). This API is compatible with Autodesk Construction Cloud (ACC) or Autodesk BIM360. 
  
 The API supports 3 legged token only.
 
 ## What's Postman?
 
-Postman is a popular tool that provides an easy-to-use interface to send HTTP requests. Postman is able to parse the responses that Forge sends you and save response parameter values to variables. These parameters can then be reused in subsequent requests through these variables. The Postman collections in this repository use this ability to provide pre-populated HTTP requests to help you follow the tutorial workflow with minimal effort. You can also modify the requests and experiment without having to write a single line of code. 
+Postman is a popular tool that provides an easy-to-use interface to send HTTP requests. Postman is able to parse the responses that APS sends you and save response parameter values to variables. These parameters can then be reused in subsequent requests through these variables. The Postman collections in this repository use this ability to provide pre-populated HTTP requests to help you follow the tutorial workflow with minimal effort. You can also modify the requests and experiment without having to write a single line of code. 
 
 - You can learn how to install and use Postman from [here](https://learning.getpostman.com/docs/postman/launching_postman/installation_and_updates).
 
@@ -34,7 +24,7 @@ Postman is a popular tool that provides an easy-to-use interface to send HTTP re
 
 ## Setup
 
-1.  **Forge Account**: Learn how to create a Forge Account, activate the subscription and create an app by [this tutorial](http://learnforge.autodesk.io/#/account/). Get Forge _client id_, _client secret_ and  _callback url_. Please register Forge app with the _callback url_ as 
+1.  **APS Account**: Learn how to create a APS Account, activate the subscription and create an app by [this tutorial](http://aps.autodesk.com/tutorials/#/account/). Get APS _client id_, _client secret_ and  _callback url_. Please register APS app with the _callback url_ as 
 
     ```https://www.getpostman.com/oauth2/callback```
 
@@ -46,7 +36,7 @@ Postman is a popular tool that provides an easy-to-use interface to send HTTP re
 
 5.  Clone this repository or download it. It's recommended to install [GitHub Desktop](https://desktop.github.com/). To clone it via command line, use the following (**Terminal** on MacOSX/Linux, **Git Shell** on Windows):
 
-    ```git clone https://github.com/autodesk-forge/forge-bim360-data.connector.api-postman.collection```
+    ```git clone https://github.com/autodesk-platform-services/aps-data-connector-postman.collection```
 
 6. Import the collection and environment files to Postman
 
@@ -78,6 +68,11 @@ Postman is a popular tool that provides an easy-to-use interface to send HTTP re
 
 2. Play the scripts. Try to change some parameters or body with more scenarios. 
    <p align="center"><img src="./help/collection.png" width="600" ></p>   
+   This collection demos 
+   * Create requests with the scheduleInterval: one time, by day, by week, by *month or by year
+   * Get requests collection, single request, jobs of request
+   * Get single job, extracted data list, and signed url of extracted data
+   * Patch or delete request
 
 ## Notes
 1.  If the request is submitted in UI, the **description** will be something like:
@@ -95,8 +90,14 @@ Postman is a popular tool that provides an easy-to-use interface to send HTTP re
 - [Data Connector Tutorial](https://forge.autodesk.com/en/docs/bim360/v1/tutorials/data-connector/)
 
 **Blogs**:
-- [Forge Blog](https://forge.autodesk.com/categories/bim-360-api)
+- [APS Blog](https://forge.autodesk.com/categories/bim-360-api)
 - [Field of View](https://fieldofviewblog.wordpress.com/), a BIM focused blog
+
+## Change Log:
+  - 7/29/2022: project level access is supported
+  - 7/29/2022: Get:jobs (all jobs with this user) is provided
+  - 7/29/2022: "all" to fetch data of all services.
+
 
 ## License
 
@@ -104,4 +105,4 @@ This sample is licensed under the terms of the [MIT License](http://opensource.o
 
 ## Written by
 
-Xiaodong Liang [@coldwood](https://twitter.com/coldwood), [Forge Partner Development](http://forge.autodesk.com)
+Xiaodong Liang [@coldwood](https://twitter.com/coldwood), Develope Advocacy and Support, Autodesk
