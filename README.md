@@ -1,7 +1,6 @@
 # Postman Collection for BIM360 Data Connector API 
 
 [![Postman](https://img.shields.io/badge/Postman-v7-orange.svg)](https://www.getpostman.com/)
-[![BIM-360 API](https://img.shields.io/badge/BIM%20360api-v1-green.svg)](https://forge.autodesk.com/en/docs/bim360/v1/overview/introduction/)
 [![Data Connector API](https://img.shields.io/badge/Data%20Connector%20API-v1-yellowgreen)](https://forge.autodesk.com/en/docs/bim360/v1/overview/field-guide/data-connector/)
 
 ![Beginner](https://img.shields.io/badge/Level-Beginner-green.svg)
