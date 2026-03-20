@@ -1,4 +1,4 @@
-# Postman Collection for BIM360 Data Connector API 
+# Postman Collection for APS Data Connector API 
 
 [![Postman](https://img.shields.io/badge/Postman-v7-orange.svg)](https://www.getpostman.com/)
 [![Data Connector API](https://img.shields.io/badge/Data%20Connector%20API-v1-yellowgreen)](https://forge.autodesk.com/en/docs/bim360/v1/overview/field-guide/data-connector/)
@@ -8,7 +8,7 @@
 
 ## Description
 
-This repository provides demos for [Data Connector API](https://forge.autodesk.com/blog/bim-360-data-connector-api-available-public-beta). This API is compatible with Autodesk Construction Cloud (ACC) or Autodesk BIM360. 
+This repository provides demos for [Data Connector API](https://forge.autodesk.com/blog/bim-360-data-connector-api-available-public-beta). This API is compatible with Autodesk Forma or Autodesk BIM360. 
  
 The API supports 3 legged token only.
 
@@ -27,11 +27,11 @@ Postman is a popular tool that provides an easy-to-use interface to send HTTP re
 
     ```https://www.getpostman.com/oauth2/callback```
 
-2. **BIM 360 Account and project**: must be Account Admin to add the app integration. [Learn about provisioning](https://forge.autodesk.com/blog/bim-360-docs-provisioning-forge-apps). Make a note with the __account name__
+2. **BIM 360 Account/Autodesk Forma hub and project**: must be Account/hub Admin to add the app integration. [Learn about provisioning](https://forge.autodesk.com/blog/bim-360-docs-provisioning-forge-apps). Make a note with the __account name__
 
 3. Since the API requires 3 legged token, and as [product help](https://knowledge.autodesk.com/support/bim-360/learn-explore/caas/CloudHelp/cloudhelp/ENU/BIM360D-Insight/files/BIM360D-Insight-data-extractor-html-html.html) indicates, this user must have the **Executive Overview** access enabled.  
 
-4. Get BIM360 account id (hub id without b.) by API , or copy from BIM360 UI. 
+4. Get BIM360 account id/Forma hub id(account/hub id without b.) by API , or copy from BIM360/Forma UI. 
 
 5.  Clone this repository or download it. It's recommended to install [GitHub Desktop](https://desktop.github.com/). To clone it via command line, use the following (**Terminal** on MacOSX/Linux, **Git Shell** on Windows):
 
@@ -75,7 +75,7 @@ Postman is a popular tool that provides an easy-to-use interface to send HTTP re
 
 ## Notes
 1.  If the request is submitted in UI, the **description** will be something like:
-   ```IQ Data Extraction for <your BIM360 account id>```
+   ```IQ Data Extraction for <your BIM360 account id/Forma hub id>```
 2.  After a new request is created by API, it would take a few minutes until **GET:Request/jobs** returns jobs list. At the beginning, job will be __queued__, next take time to __running__, finally __complete__ or __fail__. So keep polling **GET:Request/jobs** until one job is available, and test the proceeding scripts.
 3. Watch callback endpoint or email to check the notification 
  
